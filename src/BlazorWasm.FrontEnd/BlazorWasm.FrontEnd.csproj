@@ -15,4 +15,8 @@
 		<PackageReference Include="Microsoft.Agents.AI" Version="1.0.0-preview.251113.1" />
 		<PackageReference Include="Microsoft.Agents.AI.AGUI" Version="1.0.0-preview.251113.1" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\SharedModels\SharedModels.csproj" />
+	</ItemGroup>
 </Project>

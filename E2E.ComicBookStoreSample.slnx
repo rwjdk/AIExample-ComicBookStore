@@ -2,7 +2,8 @@
   <Project Path="src/AppHost/AppHost.csproj" Id="6db8f102-a129-44ff-80eb-b450c3275581" />
   <Project Path="src/AspNetWebApi.Backend/AspNetWebApi.Backend.csproj" />
   <Project Path="src/AzureFunctionApp.Backend/AzureFunctionApp.Backend.csproj" />
-  <Project Path="src/BackendShared/BackendShared.csproj" Id="32969b2e-41f5-432b-b77e-6aace25cb861" />
   <Project Path="src/BlazorWasm.FrontEnd/BlazorWasm.FrontEnd.csproj" />
   <Project Path="src/ServiceDefaults/ServiceDefaults.csproj" Id="10a4cf52-eec3-45cf-8b5b-80d302696a5a" />
+  <Project Path="src/SharedBackend/SharedBackend.csproj" Id="3271c07b-1100-4710-b25f-6c5ab1fc3462" />
+  <Project Path="src/SharedModels/SharedModels.csproj" Id="5d97ec76-5b54-4459-84c7-b15f21052486" />
 </Solution>

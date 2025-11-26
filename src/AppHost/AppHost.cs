@@ -1,3 +1,6 @@
+using Aspire.Hosting;
+using Aspire.Hosting.ApplicationModel;
+
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
 
@@ -15,6 +18,10 @@ IResourceBuilder<ProjectResource> backend = builder
 builder.AddProject<Projects.BlazorWasm_FrontEnd>("blazor-wasm-frontend")
     .WaitFor(backend);
 
-builder.AddAzureFunctionsProject<Projects.AzureFunctionApp_Backend>("azurefunctionapp-backend");
+builder.AddAzureFunctionsProject<Projects.AzureFunctionApp_Backend>("azure-function-app-backend")
+    .WithEnvironment("CBS_AZURE_OPEN_AI_ENDPOINT", azureOpenAIEndpoint)
+    .WithEnvironment("CBS_AZURE_OPEN_AI_KEY", azureOpenAIKey)
+    .WithEnvironment("CBS_COMIC_BOOK_GUY_AGENT_MODEL", "gpt-4.1-mini")
+    .WithEnvironment("CBS_ASSISTANT_AGENT_MODEL", "gpt-4.1-mini");
 
 builder.Build().Run();

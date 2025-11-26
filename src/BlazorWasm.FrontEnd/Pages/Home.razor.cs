@@ -1,8 +1,13 @@
-﻿using Blazored.LocalStorage;
+﻿using System;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Blazored.LocalStorage;
 using JetBrains.Annotations;
 using Microsoft.Agents.AI;
 using Microsoft.Agents.AI.AGUI;
 using Microsoft.Extensions.AI;
+using SharedModels;
 
 namespace BlazorWasm.FrontEnd.Pages;
 
@@ -26,18 +31,38 @@ public partial class Home(ILocalStorageService localStorageService, HttpClient h
             return;
         }
 
-        AIAgent agentToUse = _selectedPersona switch
+        switch (_selectedBackendServer)
         {
-            ChatPersona.ComicBookGuy => GetComicBookAgent(),
-            ChatPersona.Assistant => GetAssistantAgent(),
-            _ => throw new ArgumentOutOfRangeException()
-        };
+            case BackendServer.LocalAzureFunction:
+            case BackendServer.DeployedAzureFunction:
+                //Non-AG-UI
+                _answer = string.Empty;
+                AnswerRequest request = new AnswerRequest
+                {
+                    Question = _question,
+                    Persona = _selectedPersona
+                };
 
-        _answer = string.Empty;
-        await foreach (AgentRunResponseUpdate update in agentToUse.RunStreamingAsync(_question))
-        {
-            _answer += update.Text;
-            StateHasChanged();
+                HttpResponseMessage response = await httpClient.PostAsync(GetBackEndUrl(), new StringContent(JsonSerializer.Serialize(request)));
+                _answer = await response.Content.ReadAsStringAsync();
+                StateHasChanged();
+                break;
+            default:
+                //AG-UI
+                AIAgent agentToUse = _selectedPersona switch
+                {
+                    ChatPersona.ComicBookGuy => GetComicBookAgent(),
+                    ChatPersona.Assistant => GetAssistantAgent(),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+                _answer = string.Empty;
+                await foreach (AgentRunResponseUpdate update in agentToUse.RunStreamingAsync(_question))
+                {
+                    _answer += update.Text;
+                    StateHasChanged();
+                }
+
+                break;
         }
     }
 
@@ -60,6 +85,8 @@ public partial class Home(ILocalStorageService localStorageService, HttpClient h
             BackendServer.WebAppLinux => "https://best-comic-book-store-ever-backend-linux.azurewebsites.net",
             BackendServer.ContainerAppsLinux => "https://book-store-backend-container.lemondesert-e9767820.swedencentral.azurecontainerapps.io",
             BackendServer.InternetInformationServer => "http://localhost:8080",
+            BackendServer.LocalAzureFunction => "http://localhost:7261/api/FunctionGetAnswer",
+            BackendServer.DeployedAzureFunction => "https://comic-book-store-function.azurewebsites.net/api/FunctionGetAnswer",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -72,12 +99,6 @@ public partial class Home(ILocalStorageService localStorageService, HttpClient h
     private string GetPersonaButtonClass(ChatPersona persona) =>
         persona == _selectedPersona ? "persona-button active" : "persona-button";
 
-    private enum ChatPersona
-    {
-        ComicBookGuy,
-        Assistant
-    }
-
     private enum BackendServer
     {
         Local = 0,
@@ -85,6 +106,8 @@ public partial class Home(ILocalStorageService localStorageService, HttpClient h
         WebAppLinux = 2,
         ContainerAppsLinux = 3,
         InternetInformationServer = 4,
+        LocalAzureFunction = 5,
+        DeployedAzureFunction = 6,
     }
 
     private async Task OnBackendRootUrlChanged()
