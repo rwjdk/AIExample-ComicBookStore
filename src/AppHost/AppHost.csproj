@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AspNetWebApi.Backend\AspNetWebApi.Backend.csproj" />
+    <ProjectReference Include="..\AzureFunctionApp.Backend\AzureFunctionApp.Backend.csproj" />
     <ProjectReference Include="..\BlazorWasm.FrontEnd\BlazorWasm.FrontEnd.csproj" />
   </ItemGroup>
 

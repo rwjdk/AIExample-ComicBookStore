@@ -15,4 +15,6 @@ IResourceBuilder<ProjectResource> backend = builder
 builder.AddProject<Projects.BlazorWasm_FrontEnd>("blazor-wasm-frontend")
     .WaitFor(backend);
 
+builder.AddAzureFunctionsProject<Projects.AzureFunctionApp_Backend>("azurefunctionapp-backend");
+
 builder.Build().Run();

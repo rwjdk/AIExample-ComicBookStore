@@ -1,6 +1,17 @@
 @page "/"
 <!-- 42 FTW! -->
 <PageTitle>Most Impressive Comic Emporium on the Internet</PageTitle>
+
+<div style="text-align: end; background-color: black; color: white">
+    <select style="background-color: black; color: white" @bind="@_selectedBackendServer" @bind:after="OnBackendRootUrlChanged">
+        <option value="@(BackendServer.Local)">Local Backend</option>
+        <option value="@(BackendServer.WebAppWindows)">Azure WebApp (Windows) Backend</option>
+        <option value="@(BackendServer.WebAppLinux)">Azure WebApp (Linux) Backend</option>
+        <option value="@(BackendServer.ContainerAppsLinux)">Azure Container Apps (Linux) Backend</option>
+        <option value="@(BackendServer.InternetInformationServer)">Internet Information Server Backend</option>
+    </select>
+</div>
+
 <section class="comic-stage">
     <div class="starfield" aria-hidden="true"></div>
     <div class="halftone" aria-hidden="true"></div>
