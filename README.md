@@ -1,4 +1,4 @@
 # AI Examples: Comic Book Store
-An End-to-End Example for the use of AI
+An End-to-End Example for the use of AI, where we are humbled to help Comic-Book-Guy from The Simpsons build his glorious Comic Book Store Website 😁
 
-<img width="1920" height="869" alt="image" src="https://github.com/user-attachments/assets/f472bbef-cdf3-43fd-8992-58a86009e0a8" />
+<img width="1202" height="1066" alt="28 07_22_48" src="https://github.com/user-attachments/assets/d6c8b2c8-32b6-4b05-9550-980843819b60" />
