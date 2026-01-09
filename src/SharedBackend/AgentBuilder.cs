@@ -2,6 +2,7 @@
 using System.ClientModel;
 using Azure.AI.OpenAI;
 using OpenAI;
+using OpenAI.Chat;
 
 namespace SharedBackend;
 
