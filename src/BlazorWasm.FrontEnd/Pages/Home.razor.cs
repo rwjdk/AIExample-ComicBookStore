@@ -56,7 +56,7 @@ public partial class Home(ILocalStorageService localStorageService, HttpClient h
                     _ => throw new ArgumentOutOfRangeException()
                 };
                 _answer = string.Empty;
-                await foreach (AgentRunResponseUpdate update in agentToUse.RunStreamingAsync(_question))
+                await foreach (AgentResponseUpdate update in agentToUse.RunStreamingAsync(_question))
                 {
                     _answer += update.Text;
                     StateHasChanged();
@@ -68,12 +68,12 @@ public partial class Home(ILocalStorageService localStorageService, HttpClient h
 
     private AIAgent GetComicBookAgent()
     {
-        return new AGUIChatClient(httpClient, $"{GetBackEndUrl()}/comic-book-guy").CreateAIAgent();
+        return new AGUIChatClient(httpClient, $"{GetBackEndUrl()}/comic-book-guy").AsAIAgent();
     }
 
     private AIAgent GetAssistantAgent()
     {
-        return new AGUIChatClient(httpClient, $"{GetBackEndUrl()}/assistant").CreateAIAgent();
+        return new AGUIChatClient(httpClient, $"{GetBackEndUrl()}/assistant").AsAIAgent();
     }
 
     private string GetBackEndUrl()

@@ -18,20 +18,14 @@ public class FunctionGetAnswer(BackendConfiguration backendConfiguration)
     {
         AnswerRequest answerRequest = (await JsonSerializer.DeserializeAsync<AnswerRequest>(req.Body))!;
 
-        AIAgent agent;
-        switch (answerRequest.Persona)
+        AIAgent agent = answerRequest.Persona switch
         {
-            case ChatPersona.ComicBookGuy:
-                agent = AgentBuilder.GetComicBookGuy(backendConfiguration);
-                break;
-            case ChatPersona.Assistant:
-                agent = AgentBuilder.GetAssistant(backendConfiguration);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+            ChatPersona.ComicBookGuy => AgentBuilder.GetComicBookGuy(backendConfiguration),
+            ChatPersona.Assistant => AgentBuilder.GetAssistant(backendConfiguration),
+            _ => throw new ArgumentOutOfRangeException()
+        };
 
-        AgentRunResponse response = await agent.RunAsync(answerRequest.Question);
+        AgentResponse response = await agent.RunAsync(answerRequest.Question);
         return new OkObjectResult(response.Text);
     }
 }

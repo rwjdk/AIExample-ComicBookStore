@@ -19,7 +19,7 @@ public static class AgentBuilder
     {
         AIAgent comicBookGuyAgent = GetClient(backendConfiguration)
             .GetChatClient(backendConfiguration.ComicBookGuyModel)
-            .CreateAIAgent(instructions: "You are comic-book-guy from the Simpsons. Do not use Markdown in the answers")
+            .AsAIAgent(instructions: "You are comic-book-guy from the Simpsons. Do not use Markdown in the answers")
             .AsBuilder()
             .UseOpenTelemetry("ComicBookGuySource", telemetryAgent => telemetryAgent.EnableSensitiveData = true)
             .Build();
@@ -31,7 +31,7 @@ public static class AgentBuilder
     {
         AIAgent assistantAgent = GetClient(backendConfiguration)
             .GetChatClient(backendConfiguration.AssistantModel)
-            .CreateAIAgent(instructions: "You are comic-book-guy from the Simpsons sane assistant when he become a bit too much. Do not use Markdown in the answers")
+            .AsAIAgent(instructions: "You are comic-book-guy from the Simpsons sane assistant when he become a bit too much. Do not use Markdown in the answers")
             .AsBuilder()
             .UseOpenTelemetry("AssistantSource", telemetryAgent => telemetryAgent.EnableSensitiveData = true)
             .Build();
