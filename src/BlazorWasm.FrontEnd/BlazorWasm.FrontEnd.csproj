@@ -12,8 +12,8 @@
 		<PackageReference Include="JetBrains.Annotations" Version="2025.2.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.3" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.Agents.AI" Version="1.0.0-preview.260212.1" />
-		<PackageReference Include="Microsoft.Agents.AI.AGUI" Version="1.0.0-preview.260212.1" />
+		<PackageReference Include="Microsoft.Agents.AI" Version="1.0.0-rc1" />
+		<PackageReference Include="Microsoft.Agents.AI.AGUI" Version="1.0.0-preview.260219.1" />
 	</ItemGroup>
 
 	<ItemGroup>
