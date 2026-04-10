@@ -10,10 +10,10 @@
 	<ItemGroup>
 		<PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
 		<PackageReference Include="JetBrains.Annotations" Version="2025.2.4" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.3" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.3" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.Agents.AI" Version="1.0.0" />
-		<PackageReference Include="Microsoft.Agents.AI.AGUI" Version="1.0.0-preview.260402.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.5" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Agents.AI" Version="1.1.0" />
+		<PackageReference Include="Microsoft.Agents.AI.AGUI" Version="1.1.0-preview.260410.1" />
 	</ItemGroup>
 
 	<ItemGroup>
