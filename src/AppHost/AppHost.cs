@@ -4,9 +4,9 @@ using Aspire.Hosting.ApplicationModel;
 IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
 
-var azureOpenAIEndpoint = builder.AddParameter("AzureOpenAiEndpoint", secret: true);
+IResourceBuilder<ParameterResource> azureOpenAIEndpoint = builder.AddParameter("AzureOpenAiEndpoint", secret: true);
 
-var azureOpenAIKey = builder.AddParameter("AzureOpenAiKey", secret: true);
+IResourceBuilder<ParameterResource> azureOpenAIKey = builder.AddParameter("AzureOpenAiKey", secret: true);
 
 IResourceBuilder<ProjectResource> backend = builder
     .AddProject<Projects.AspNetWebApi_Backend>("aspnet-webapi-backend")
